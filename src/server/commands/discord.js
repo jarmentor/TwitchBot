@@ -1,5 +1,4 @@
-// commands/discord.js
-module.exports = async function discord(twitchClient, channel) {
+export async function execute(client, channel) {
   const discordLink = "https://discord.gg/your-invite-code";
-  twitchClient.say(channel, `Join our Discord server: ${discordLink}`);
-};
+  client.say(channel, `Join our Discord server: ${discordLink}`);
+}

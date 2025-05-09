@@ -1,11 +1,8 @@
-// commands/accountage.js
-module.exports = async function accountage(twitchClient, channel, userstate) {
+export async function execute(client, channel, userstate) {
   // Retrieve account creation date using Twitch API
-  // (Not possible with Twitch.js alone, so you need to use another library or API call)
-  const accountCreationDate = "2018-01-01"; // Replace with actual account creation date
+  // (You'll need to fetch this using Twitch's Helix API)
+  const accountCreationDate = "2018-01-01"; // Replace with actual API result
   const username = userstate.username;
-  twitchClient.say(
-    channel,
-    `${username}'s account was created on ${accountCreationDate}.`
-  );
-};
+
+  client.say(channel, `${username}'s account was created on ${accountCreationDate}.`);
+}
