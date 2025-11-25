@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import passport from "passport";
 dotenv.config();
 import express from "express";
 import cookieParser from "cookie-parser";
@@ -17,6 +18,9 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(cookieParser());
+
+app.use(passport.initialize());
+app.use(passport.session())
 
 const mongoURI = process.env.NODE_ENV === "test"
   ? process.env.MONGO_TEST_URI
