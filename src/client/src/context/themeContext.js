@@ -1,4 +1,4 @@
-.import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useContext } from "react";
 import { useMediaQuery } from "@mui/material";
 import {
   createTheme,
@@ -9,22 +9,23 @@ import PropTypes from "prop-types";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
+const getInitialMode = (prefersDarkMode) => {
+  const storedMode = localStorage.getItem("mode");
+  if (storedMode) {
+    return storedMode;
+  }
+  return prefersDarkMode ? "dark" : "light";
+};
+
 const ThemeProvider = ({ children }) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const [mode, setMode] = useState(
-    localStorage.getItem("mode") || (prefersDarkMode ? "dark" : "light")
-  );
-
-  useEffect(() => {
-    localStorage.setItem("mode", mode);
-  }, [mode]);
+  const [mode, setMode] = useState(() => getInitialMode(prefersDarkMode));
 
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => {
           const newMode = prevMode === "light" ? "dark" : "light";
-          localStorage.setItem("mode", newMode);
           return newMode;
         });
       },
@@ -32,14 +33,22 @@ const ThemeProvider = ({ children }) => {
     []
   );
 
-  const theme = createTheme({
-    palette: {
-      mode,
-    },
-  });
+  useEffect(() => {
+    localStorage.setItem("mode", mode);
+  }, [mode]);
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode]
+  );
 
   return (
-    <ColorModeContext.Provider value={{ colorMode }}>
+    <ColorModeContext.Provider value={colorMode}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         {children}
@@ -48,8 +57,12 @@ const ThemeProvider = ({ children }) => {
   );
 };
 
-ThemeProvider.propTypes = { children: PropTypes.node.isRequired};
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default ThemeProvider;
 
 export { ColorModeContext };
+
+export const useColorMode = () => useContext(ColorModeContext);
