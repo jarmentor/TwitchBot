@@ -22,7 +22,7 @@ afterAll(async () => {
 describe("Server", () => {
   describe("POST /register", () => {
     it("should register a new user", async () => {
-      const res = await request(server).post("/register").send({
+      const res = await request(server).post("/api/user/register").send({
         username: "testuser",
         email: "test@test.com",
         password: "testpassword",
@@ -32,7 +32,7 @@ describe("Server", () => {
 
     it("should return an error for duplicate username", async () => {
       const res = await request(server)
-        .post("/register")
+        .post("/api/user/register")
         .send({ username: "testuser", password: "testpassword" });
       expect(res.statusCode).toEqual(400);
     });
@@ -41,14 +41,14 @@ describe("Server", () => {
   describe("POST /login", () => {
     it("should log in a user", async () => {
       const res = await request(server)
-        .post("/login")
+        .post("/api/user/login")
         .send({ username: "testuser", password: "testpassword" });
       expect(res.statusCode).toEqual(200);
     });
 
     it("should return an error for invalid credentials", async () => {
       const res = await request(server)
-        .post("/login")
+        .post("/api/user/login")
         .send({ username: "invaliduser", password: "invalidpassword" });
       expect(res.statusCode).toEqual(401);
       // Add more assertions to validate the error response if needed
