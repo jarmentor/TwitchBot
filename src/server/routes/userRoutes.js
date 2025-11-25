@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
     // Generate JWT Token
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: "1h" });
 
-    res.cookie("accessToken", token, { httpOnly: true }).status(200).json({ username: user.username });
+    res.cookie("accessToken", token, { httpOnly: true }).status(200).json(userInfo);
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ error: "Server error while logging in" });
