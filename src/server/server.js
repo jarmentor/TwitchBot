@@ -72,7 +72,9 @@ client.on("connected", (addr, port) => {
 
 client.on("disconnected", (reason) => {
   console.error(`❌ Disconnected from Twitch chat: ${reason}`);
-  client.connect();
+  setTimeout(() => {
+    client.connect();
+  }, 5000);
 });
 
 // Basic Routes
