@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+.import React, { useState, useMemo, useEffect } from "react";
 import { useMediaQuery } from "@mui/material";
 import {
   createTheme,
@@ -48,7 +48,7 @@ const ThemeProvider = ({ children }) => {
   );
 };
 
-ThemeProvider.propTypes = { children: PropTypes.node };
+ThemeProvider.propTypes = { children: PropTypes.node.isRequired};
 
 export default ThemeProvider;
 
