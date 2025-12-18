@@ -18,7 +18,7 @@ const AppBarComponent = () => {
   };
 
   const theme = useTheme();
-  const { colorMode } = React.useContext(ColorModeContext);
+  const colorMode = React.useContext(ColorModeContext);
 
   return (
     <>

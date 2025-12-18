@@ -1,14 +1,13 @@
 import "@testing-library/jest-dom";
 import React from "react";
+import { vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import ThemeProvider, { ColorModeContext } from "../context/themeContext";
 import AppBarComponent from "../components/AppBar";
 
 // Mock the ColorModeContext value
 const mockColorModeContext = {
-  colorMode: {
-    toggleColorMode: jest.fn(),
-  },
+  toggleColorMode: vi.fn(),
 };
 
 test("AppBarComponent toggles drawer menu and dark mode", async () => {
@@ -29,7 +28,5 @@ test("AppBarComponent toggles drawer menu and dark mode", async () => {
   // Click the dark mode toggle
   fireEvent.click(screen.getByTestId("themeBtn"));
   // Assert that toggleColorMode function is called
-  expect(mockColorModeContext.colorMode.toggleColorMode).toHaveBeenCalledTimes(
-    1
-  );
+  expect(mockColorModeContext.toggleColorMode).toHaveBeenCalledTimes(1);
 });

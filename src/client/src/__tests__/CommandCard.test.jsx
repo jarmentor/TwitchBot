@@ -1,6 +1,7 @@
 import React from "react";
+import { vi } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import CommandCard from "../components/CommandCard";
 
 describe("CommandCard", () => {
@@ -18,8 +19,8 @@ describe("CommandCard", () => {
   });
 
   test("calls onLearnMore and onExecute callbacks when buttons are clicked", () => {
-    const onLearnMoreMock = jest.fn();
-    const onExecuteMock = jest.fn();
+    const onLearnMoreMock = vi.fn();
+    const onExecuteMock = vi.fn();
     const { getByText } = render(
       <CommandCard
         command="Test Command"

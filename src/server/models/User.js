@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
-  twitchId: { type: String, unique: true },
-  discordId: { type: String, unique: true },
+  password: { type: String },
+  twitchId: { type: String, unique: true, sparse: true },
+  discordId: { type: String, unique: true, sparse: true },
   createdAt: { type: Date, default: Date.now },
 });
 

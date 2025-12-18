@@ -24,11 +24,19 @@ export async function execute(client, channel, tags) {
     }
 
     const followDate = new Date(followData.followed_at);
-    const duration = Math.floor((Date.now() - followDate) / (1000 * 60 * 60 * 24)); // Convert to days
+    const duration = Math.floor(
+      (Date.now() - followDate) / (1000 * 60 * 60 * 24)
+    ); // Convert to days
 
-    client.say(channel, `${username} has been following ${channel} for ${duration} days.`);
+    client.say(
+      channel,
+      `${username} has been following ${channel} for ${duration} days.`
+    );
   } catch (error) {
     console.error(`❌ Error fetching followage: ${error.message}`);
-    client.say(channel, "⚠️ Unable to retrieve follow duration. Try again later.");
+    client.say(
+      channel,
+      "⚠️ Unable to retrieve follow duration. Try again later."
+    );
   }
 }
