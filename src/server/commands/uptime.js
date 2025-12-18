@@ -26,6 +26,9 @@ export async function execute(client, channel) {
     }
   } catch (error) {
     console.error(`❌ Error fetching stream uptime: ${error.message}`);
-    client.say(channel, "⚠️ Unable to retrieve stream uptime. Try again later.");
+    client.say(
+      channel,
+      "⚠️ Unable to retrieve stream uptime. Try again later."
+    );
   }
 }

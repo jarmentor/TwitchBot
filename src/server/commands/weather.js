@@ -21,6 +21,9 @@ export async function execute(client, channel, tags, args) {
     client.say(channel, `🌤 Weather in ${name}: ${condition}, ${temp}°C`);
   } catch (error) {
     console.error("❌ Weather API Error:", error.message);
-    client.say(channel, "Error retrieving weather data. Make sure the city name is correct.");
+    client.say(
+      channel,
+      "Error retrieving weather data. Make sure the city name is correct."
+    );
   }
 }

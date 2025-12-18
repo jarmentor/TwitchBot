@@ -11,7 +11,10 @@ export async function execute(client, channel) {
     }
 
     const lastUpdated = new Date(updatedAt).toLocaleString();
-    client.say(channel, `📌 Current Project: ${description} (Last updated: ${lastUpdated})`);
+    client.say(
+      channel,
+      `📌 Current Project: ${description} (Last updated: ${lastUpdated})`
+    );
   } catch (error) {
     console.error("❌ Error fetching project:", error.message);
     client.say(channel, "⚠️ Unable to retrieve project info.");

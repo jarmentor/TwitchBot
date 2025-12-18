@@ -14,15 +14,29 @@ export async function execute(client, channel, tags, args) {
     tags.badges?.vip; // VIP
 
   if (!isAllowed) {
-    client.say(channel, "❌ You must be a streamer, mod, or VIP to use this command.");
+    client.say(
+      channel,
+      "❌ You must be a streamer, mod, or VIP to use this command."
+    );
     return;
   }
 
   try {
-    await client.timeout(channel, username, parsedDuration, "Timed out by bot command");
-    client.say(channel, `⏳ ${username} has been timed out for ${parsedDuration} seconds.`);
+    await client.timeout(
+      channel,
+      username,
+      parsedDuration,
+      "Timed out by bot command"
+    );
+    client.say(
+      channel,
+      `⏳ ${username} has been timed out for ${parsedDuration} seconds.`
+    );
   } catch (error) {
     console.error(`❌ Error timing out ${username}: ${error.message}`);
-    client.say(channel, "⚠️ Unable to timeout user. Check permissions or try again.");
+    client.say(
+      channel,
+      "⚠️ Unable to timeout user. Check permissions or try again."
+    );
   }
 }

@@ -4,5 +4,8 @@ export async function execute(client, channel, userstate) {
   const accountCreationDate = "2018-01-01"; // Replace with actual API result
   const username = userstate.username;
 
-  client.say(channel, `${username}'s account was created on ${accountCreationDate}.`);
+  client.say(
+    channel,
+    `${username}'s account was created on ${accountCreationDate}.`
+  );
 }
