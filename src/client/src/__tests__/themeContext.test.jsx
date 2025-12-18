@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import ThemeProvider, { ColorModeContext } from "../context/themeContext";
 
 describe("ThemeProvider component", () => {
@@ -38,7 +38,7 @@ describe("ThemeProvider component", () => {
 
 // A test component to be used in the second test
 const TestComponent = () => {
-  const { colorMode } = useContext(ColorModeContext);
+  const colorMode = useContext(ColorModeContext);
 
   return (
     <div>

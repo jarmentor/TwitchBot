@@ -12,8 +12,9 @@ router.post("/register", async (req, res) => {
 
     // Check if the user already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-    if (existingUser)
+    if (existingUser) {
       return res.status(400).json({ error: "User already exists" });
+    }
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -45,7 +46,7 @@ router.post("/login", async (req, res) => {
     res
       .cookie("accessToken", token, { httpOnly: true })
       .status(200)
-      .json(userInfo);
+      .json({ username: user.username, email: user.email });
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ error: "Server error while logging in" });

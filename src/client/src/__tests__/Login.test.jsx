@@ -1,7 +1,7 @@
-/* global Promise */
 import React from "react";
+import { vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { AuthContext } from "../context/authContext";
 import Login from "../components/Login";
 
@@ -31,13 +31,13 @@ describe("Login component", () => {
   test("displays error message when login fails", async () => {
     const errorMessage = "Invalid credentials.";
 
-    const loginMock = jest
+    const loginMock = vi
       .fn()
       .mockImplementation(() =>
         Promise.reject({ response: { data: { error: errorMessage } } })
       );
 
-    global.console.error = jest.fn();
+    global.console.error = vi.fn();
 
     render(
       <AuthContext.Provider value={{ currentUser: null, login: loginMock }}>
@@ -62,7 +62,7 @@ describe("Login component", () => {
   });
 
   test("calls logout function when logout button is clicked", async () => {
-    const logoutMock = jest.fn();
+    const logoutMock = vi.fn();
 
     render(
       <AuthContext.Provider

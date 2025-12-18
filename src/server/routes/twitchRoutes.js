@@ -3,7 +3,6 @@ dotenv.config();
 import express from "express";
 import passport from "passport";
 import { Strategy as TwitchStrategy } from "passport-twitch-new";
-import User from "../models/User.js";
 
 const router = express.Router();
 

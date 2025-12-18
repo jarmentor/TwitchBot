@@ -12,7 +12,6 @@ import {
 import { Edit as EditIcon } from "@mui/icons-material";
 
 const LeaderBoard = () => {
-  // eslint-disable-next-line no-unused-vars -- until functionality is implemented
   const [leaderboardData, setLeaderboardData] = useState([]);
 
   useEffect(() => {
@@ -26,7 +25,6 @@ const LeaderBoard = () => {
     setLeaderboardData(mockData);
   }, []);
 
-  // eslint-disable-next-line no-unused-vars -- until functionality is implemented
   const handleEditClick = (userId) => {
     // Handle edit action, e.g., open a dialog with user details
     // Placeholder function for handling edit action

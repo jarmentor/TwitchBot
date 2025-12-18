@@ -48,8 +48,12 @@ const client = new tmi.Client({
 client.connect();
 
 client.on("message", (channel, tags, message, self) => {
-  if (self) return;
-  if (!message.startsWith("!")) return;
+  if (self) {
+    return;
+  }
+  if (!message.startsWith("!")) {
+    return;
+  }
 
   const args = message.slice(1).split(" ");
   const commandName = args.shift().toLowerCase();

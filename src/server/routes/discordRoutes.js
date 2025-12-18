@@ -2,7 +2,6 @@ import express from "express";
 import passport from "passport";
 import { Strategy as DiscordStrategy } from "passport-discord";
 import dotenv from "dotenv";
-import User from "../models/User.js";
 
 dotenv.config();
 const router = express.Router();

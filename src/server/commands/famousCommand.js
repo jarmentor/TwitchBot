@@ -1,6 +1,8 @@
 export function execute(client) {
   client.on("message", (channel, tags, message, self) => {
-    if (self) return; // Ignore bot messages
+    if (self) {
+      return;
+    } // Ignore bot messages
 
     if (/famous/i.test(message)) {
       const username = tags.username;
