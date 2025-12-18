@@ -6,27 +6,30 @@ import { Strategy as TwitchStrategy } from "passport-twitch-new";
 
 const router = express.Router();
 
-passport.use(
-  new TwitchStrategy(
-    {
-      clientID: process.env.TWITCH_CLIENT_ID,
-      clientSecret: process.env.TWITCH_CLIENT_SECRET,
-      callbackURL: "http://localhost:3001/api/twitch/auth/callback",
-      scope: ["user:read:email", "chat:read", "chat:edit"],
-    },
-    (accessToken, refreshToken, profile, done) => {
-      done(null, { profile, accessToken });
-    }
-  )
-);
+// Only initialize Twitch strategy if credentials are configured
+if (process.env.TWITCH_CLIENT_ID && process.env.TWITCH_CLIENT_SECRET) {
+  passport.use(
+    new TwitchStrategy(
+      {
+        clientID: process.env.TWITCH_CLIENT_ID,
+        clientSecret: process.env.TWITCH_CLIENT_SECRET,
+        callbackURL: "http://localhost:3001/api/twitch/auth/callback",
+        scope: ["user:read:email", "chat:read", "chat:edit"],
+      },
+      (accessToken, refreshToken, profile, done) => {
+        done(null, { profile, accessToken });
+      }
+    )
+  );
 
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
+  passport.serializeUser((user, done) => {
+    done(null, user);
+  });
 
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
-});
+  passport.deserializeUser((obj, done) => {
+    done(null, obj);
+  });
+}
 
 router.get("/auth", passport.authenticate("twitch"));
 
